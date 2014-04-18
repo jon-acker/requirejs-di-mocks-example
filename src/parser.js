@@ -1,4 +1,4 @@
-define(['calculator'], function(calculator) {
+define(['calculator', 'speedometer'], function(calculator, speedometer) {
 
     return {
 
@@ -9,6 +9,12 @@ define(['calculator'], function(calculator) {
         calc: function calc(string) {
             var result = calculator.sum(2, 3);
             return string + ' ' + result;
+        },
+
+        measure: function measure(string) {
+            speedometer.setSpeed(string.length);
+
+            return speedometer.getSpeed();
         }
     }
 });
