@@ -1,0 +1,15 @@
+{
+  "name": "Require-DI",
+  "version": "0.0.1",
+  "description": "Exmample of dependency injection jusing requirejs",
+  "main": "main.js",
+  "scripts": {
+    "test": "grunt jasmine"
+  },
+  "devDependencies": {
+    "grunt-contrib-jasmine": "~0.5.3",
+    "grunt-contrib-jshint": "~0.2.0",
+    "grunt-template-jasmine-requirejs": "~0.1.10"
+  },
+  "author": "Jon Acker"
+}
