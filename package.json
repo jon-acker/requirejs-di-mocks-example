@@ -1,6 +1,6 @@
 {
   "name": "Require-DI",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Exmample of dependency injection using requirejs",
   "main": "main.js",
   "scripts": {

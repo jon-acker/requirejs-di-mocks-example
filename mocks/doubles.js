@@ -1,12 +1,11 @@
 define(function() {
     var doubles = {};
+    var modules = ['calculator', 'speedometer'];
 
-    define('double/calculator', ['calculator'], function(calculator) {
-        return doubles['calculator'] = jasmine.createSpyObj('calculator', Object.keys(calculator));
-    });
-
-    define('double/speedometer', ['speedometer'], function(speedometer) {
-        return doubles['speedometer'] = jasmine.createSpyObj('speedometer', Object.keys(speedometer));
+    modules.forEach(function(moduleName) {
+        define('double/' + moduleName, [moduleName], function(module) {
+            return doubles[moduleName] = jasmine.createSpyObj(moduleName, Object.keys(module));
+        });
     });
 
     require.config({
