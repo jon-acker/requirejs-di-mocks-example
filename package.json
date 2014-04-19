@@ -1,7 +1,7 @@
 {
   "name": "Require-DI",
   "version": "0.0.1",
-  "description": "Exmample of dependency injection jusing requirejs",
+  "description": "Exmample of dependency injection using requirejs",
   "main": "main.js",
   "scripts": {
     "test": "grunt jasmine"

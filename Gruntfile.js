@@ -12,8 +12,8 @@ module.exports = function(grunt) {
                     requireConfigFile: 'config.js',
                     requireConfig: {
                         map: {
-                            'parser': {
-                                'calculator': 'double/calculator'
+                            '*': {
+                                'mocks/doubles': '../mocks/doubles'
                             }
                         }
                     }
