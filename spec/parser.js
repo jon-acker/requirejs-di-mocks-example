@@ -1,4 +1,4 @@
-define(['mocks/doubles', 'parser'], function(doubles, parser) {
+define(['doubles/dummies', 'parser'], function(doubles, parser) {
 
     describe('Parser', function() {
 

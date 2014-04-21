@@ -4,7 +4,7 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         jasmine : {
-            src : ['mocks/*', 'src/**/*.js'],
+            src : ['doubles/*', 'src/**/*.js'],
             options : {
                 specs : 'spec/**/*.js',
                 template: require('grunt-template-jasmine-requirejs'),
@@ -13,7 +13,7 @@ module.exports = function(grunt) {
                     requireConfig: {
                         map: {
                             '*': {
-                                'mocks/doubles': '../mocks/doubles'
+                                'doubles/dummies': '../doubles/dummies'
                             }
                         }
                     }
