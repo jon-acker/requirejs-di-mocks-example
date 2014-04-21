@@ -2,32 +2,28 @@ define(['doubles/dummies', 'parser'], function(doubles, parser) {
 
     describe('Parser', function() {
 
-        it('parses a string', function() {
-
-            expect(parser.parse('string')).toEqual(['s', 't', 'r', 'i', 'n', 'g']);
-
+        it('returns an empty array given no input', function() {
+            expect(parser.parse()).toEqual([]);
         });
 
-        it('calculates a string', function() {
-
-            doubles.get('calculator').sum.andReturn(5);
-
-            expect(parser.calc('string')).toBe('string 5');
+        it('returns an empty array given empty input', function() {
+            expect(parser.parse('')).toEqual([]);
         });
 
-        it('calculates a string again', function() {
-
-            doubles.get('calculator').sum.andReturn(15);
-
-            expect(parser.calc('string')).toBe('string 15');
+        it('returns an empty array given spaces input', function() {
+            expect(parser.parse('   ')).toEqual([]);
         });
 
-        it('it measures the speed of a string', function() {
+        it('returns an array with one word given one word', function() {
+            expect(parser.parse('blah')).toEqual(['blah']);
+        });
 
-            doubles.get('speedometer').getSpeed.andReturn(6);
+        it('returns an array with n words given n words', function() {
+            expect(parser.parse('blah1 blah2')).toEqual(['blah1', 'blah2']);
+        });
 
-            expect(parser.measure('string')).toBe(6);
-            expect(doubles.get('speedometer').setSpeed).toHaveBeenCalledWith(6);
+        it('returns an array with n words given n words separated by spaces', function() {
+            expect(parser.parse( 'blah1   blah2 ')).toEqual(['blah1', 'blah2']);
         })
     })
 })

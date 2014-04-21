@@ -1,6 +1,6 @@
 define(function() {
+
     var doubles = {};
-    var modules = [];
     var dependencies = {
         parser: {
             calculator: '',
@@ -10,7 +10,7 @@ define(function() {
             speedometer: ''
         }
     };
-    
+
     Object.keys(dependencies).forEach(function(moduleName) {
         Object.keys(dependencies[moduleName]).forEach(function(dependencyName) {
             dependencies[moduleName][dependencyName] = 'double/' + dependencyName;
