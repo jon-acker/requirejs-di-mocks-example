@@ -1,25 +1,32 @@
 define(function() {
     var doubles = {};
-    var modules = ['calculator', 'speedometer'];
-
-    modules.forEach(function(moduleName) {
-        define('double/' + moduleName, [moduleName], function(module) {
-            return doubles[moduleName] = jasmine.createSpyObj(moduleName, Object.keys(module));
+    var modules = [];
+    var dependencies = {
+        parser: {
+            calculator: '',
+            speedometer: ''
+        },
+        calculator: {
+            speedometer: ''
+        }
+    };
+    
+    Object.keys(dependencies).forEach(function(moduleName) {
+        Object.keys(dependencies[moduleName]).forEach(function(dependencyName) {
+            dependencies[moduleName][dependencyName] = 'double/' + dependencyName;
+            define(dependencies[moduleName][dependencyName], [dependencyName], function(dependency) {
+                return doubles[dependencyName] = jasmine.createSpyObj(dependencyName, Object.keys(dependency));
+            });
         });
     });
 
     require.config({
-        map: {
-            parser: {
-                calculator: 'double/calculator',
-                speedometer: 'double/speedometer'
-            }
-        }
+        map: dependencies
     });
 
     return {
-        get: function (moduleName) {
-            return doubles[moduleName];
+        get: function (dependencyName) {
+            return doubles[dependencyName];
         }
     };
 });
