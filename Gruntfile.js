@@ -4,7 +4,7 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         jasmine : {
-            src : ['doubles/*', 'src/**/*.js'],
+            src : ['doubles/mock.js', 'src/**/*.js'],
             options : {
                 keepRunner: true,
                 specs : 'spec/**/*.js',
@@ -14,7 +14,7 @@ module.exports = function(grunt) {
                     requireConfig: {
                         map: {
                             '*': {
-                                'doubles/dummies': '../doubles/dummies'
+                                'mock': '../doubles/mock'
                             }
                         }
                     }
