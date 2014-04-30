@@ -7,12 +7,11 @@ An example of how requirejs can be used as a DI container in order to provide ja
 
 Clone the project, then:
 
-  npm install -g grunt
-  
-  npm install
+    npm install -g grunt
+    npm install
   
 To run the specs:
 
-  grunt jasmine 
+    grunt jasmine 
   
 To view the specs run in the browser, load the local file: _SpecRunner.html
