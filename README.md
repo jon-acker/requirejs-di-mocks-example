@@ -7,7 +7,7 @@ An example of how requirejs can be used as a DI container in order to provide ja
 
 Clone the project, then:
 
-    npm install -g grunt
+    sudo npm install -g grunt
     npm install
   
 To run the specs:
