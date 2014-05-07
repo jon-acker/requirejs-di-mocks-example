@@ -112,8 +112,8 @@ module.exports = function(grunt) {
                 specs : 'spec/**/*.js',
                 template: require('grunt-template-jasmine-requirejs'),
                 templateOptions: {
-                    requireConfigFile: 'config.js',
-                    requireConfig: {
+                    requireConfig: {,
+                        baseUrl: 'src/',
                         map: {
                             'parser': {
                                 'tokenizer': 'double/tokenizer'
@@ -130,5 +130,87 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['jasmine']);
 };
 ```
+
+The "map" configuration options essentially tells requirejs that when "parser" requires "tokenizer", give it "double/tokenizer" instead.
+
+We also need to define our dummy collaborators in the file doubles/doubles.js (which we've asked grunt-jasmine to process prior to any other files)
+
+In the folder doubles/ create a new file called doubles.js:
+```javascript
+define('double/tokenizer', function() {
+    return jasmine.createSpyObj('tokenizer', ['tokenize']);
+});
+```
+
+Here we are defining our double as a jasmine dummy with one method. And now our specs should run again with no errors.
+
+In order to use this collaborator in our spec, lets write add a spec for our parser method that will actually use this collaborator:
+
+```javascript
+define(['double/tokenizer', 'parser'], function(tokenizer, parser) {
+    describe('Parser module', function() {
+
+        it('parses a string into letters', function() {
+            expect(parser.parse('str')).toEqual(['s', 't', 'r']);
+        });
+
+        it('returns token found in the string', function() {
+            expect(parser.parseTokens('{b} string {a}')).toEqual(['a', 'b']);
+            expect(tokenizer.tokenize).toHaveBeenCalledWith('{b} string {a}');
+        });
+
+    });
+});
+```
+
+Predictably, our test runner will fail complaining that parser.parseTokens is undefined. Lets add this method to our parser module, pretending that our collaborating module "tokenizer" already exists:
+
+```javascript
+define(['tokenizer'], function(tokenizer) {
+    return {
+        parse: function (string) {
+            return string.split('');
+        },
+        parseTokens: function (string) {
+            return tokenizer.tokenize(string);
+        }
+    }
+});
+```
+
+If we run grunt jasmine, we should now get the following failure message:
+> Expected undefined to equal [ 'a', 'b' ]
+
+The reason for this is that we have not yet stubbed any of our dummy's methods. This is now a simple task now that our collaborator has been provided and it follows jasmin's standard syntax. Modify the parser spec as follows:
+
+
+```
+define(['double/tokenizer', 'parser'], function(tokenizer, parser) {
+    describe('Parser module', function() {
+
+        it('parses a string into letters', function() {
+            expect(parser.parse('str')).toEqual(['s', 't', 'r']);
+        });
+
+        it('returns token found in the string', function() {
+            tokenizer.tokenize.andReturn(['a', 'b']);
+
+            expect(parser.parseTokens('{b} string {a}')).toEqual(['a', 'b']);
+            expect(tokenizer.tokenize).toHaveBeenCalledWith('{b} string {a}');
+        });
+
+    });
+});
+```
+
+And now when we run the tests we should get:
+```
+Testing jasmine specs via phantom
+..
+2 specs in 0.001s.
+>> 0 failures
+```
+
+
 
 
