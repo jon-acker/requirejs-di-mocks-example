@@ -223,6 +223,36 @@ Testing jasmine specs via phantom
 >> 0 failures
 ```
 
+##Using the module in the production envionment
+Requirejs can be instructed, on load, to run an intial module, often called main.js. Your index.html needs to read as follows:
+```
+<script src="node_modules/grunt-template-jasmine-requirejs/vendor/require-2.1.10.js" data-main="main.js"></script>
+```
+
+And main.js, which resides in the root folder, might contain:
+```javascript
+require.config({
+    baseUrl: 'src/'
+});
+
+define(['parser'], function(parser) {
+    console.log(parser.parseTokens('{a} string {d} blah {b} {c}'));
+});
+```
+
+If you load the file index.html into your browser, you'll see an error effectively telling you that the tokenizer module doesn't exist - since so far it has only been mocked!
+
+In src/tokenizer.js create an implementation for the tokenizer module:
+```javascript
+define(function() {
+   return {
+       tokenize: function (string) {
+            return string.match(/\{(\w)\}/g);
+       }
+   }
+});
+```
+
 ##Taking it further and simplifying the process
 
 
