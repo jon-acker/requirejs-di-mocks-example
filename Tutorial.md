@@ -156,7 +156,6 @@ define(['double/tokenizer', 'parser'], function(tokenizer, parser) {
 
         it('returns token found in the string', function() {
             expect(parser.parseTokens('{b} string {a}')).toEqual(['a', 'b']);
-            expect(tokenizer.tokenize).toHaveBeenCalledWith('{b} string {a}');
         });
 
     });
@@ -181,10 +180,23 @@ define(['tokenizer'], function(tokenizer) {
 If we run grunt jasmine, we should now get the following failure message:
 > Expected undefined to equal [ 'a', 'b' ]
 
-The reason for this is that we have not yet stubbed any of our dummy's methods. This is now a simple task now that our collaborator has been provided and it follows jasmin's standard syntax. Modify the parser spec as follows:
-
+The reason for this is that we have not yet stubbed any of our dummy's methods. This is now a simple task now that our collaborator has been provided and it follows jasmin's standard syntax, by adding the line:
 
 ```
+tokenizer.tokenize.andReturn(['a', 'b']);
+```
+
+And to take advantage of the fact that our collaborator is a jasmine spy, we also add this line after our object-under-spec has executed the method in question.
+
+```
+expect(tokenizer.tokenize).toHaveBeenCalledWith('{b} string {a}');
+```
+
+This will confirm that our collaborators method was indeed called with the expected arguments.
+
+The parser spec should now read as follows:
+
+```javascript
 define(['double/tokenizer', 'parser'], function(tokenizer, parser) {
     describe('Parser module', function() {
 
@@ -211,6 +223,7 @@ Testing jasmine specs via phantom
 >> 0 failures
 ```
 
+##Taking it further and simplifying the process
 
 
 
