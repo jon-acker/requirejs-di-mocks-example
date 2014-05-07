@@ -47,7 +47,7 @@ will run any specs found. Since there are none yet, it should produce:
 > Warning: No specs executed
 
 In order to create our first spec, we'll create a folder called spec/ and place in it a single javascript spec file: e.g. parser.js
-```
+```javascript
 define(['parser'], function(parser) {
     describe('Parser module', function() {
 
@@ -63,7 +63,7 @@ If we run grunt jasmine again, we should see:
 > Error: scripterror: Illegal path or script error: ['parser']
 
 The spec running is telling us that it can't find the parser module. So we'll now create another folder called src/, and place into it the file parser.js:
-```
+```javascript
 define(function() {
     return {
         parse: function (string) {
@@ -87,7 +87,7 @@ The point of this article was to show a simple way of specing a module in isolat
 Imagine we want a new method on our parser, which can parse "token" (whatever that means), but we know that parsing tokens is probably a complex algorithm that we'd like to delegate to a collaborator called "tokenizer"
 
 What we want require to do for us, is instead of providing our parser module with the real tokenizer dependency, we'd like it (in our test environment) to provide a dummy (in this case a jasmine, spy object) as a collaborator available for us to mock in our parser spec:
-```
+```javascript
 define(['double/tokenizer', 'parser'], function(tokenizer, parser) {
     describe('Parser module', function() {
 
@@ -101,7 +101,7 @@ define(['double/tokenizer', 'parser'], function(tokenizer, parser) {
 If we run grunt jasmine, it will complain that it can't find the module "double/tokenizer". In order to provide our double to the spec, we'll take advantage of requirejs's custom mapping feature, and tell it to include our simple definition of this dummy collaborator:
 
 
-```
+```javascript
 module.exports = function(grunt) {
 
     grunt.initConfig({
