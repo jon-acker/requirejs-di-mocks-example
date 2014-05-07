@@ -1,4 +1,4 @@
-define(['calculator', 'speedometer'], function(calculator, speedometer) {
+define(['calculator'], function(calculator) {
 
     return {
 

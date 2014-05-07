@@ -4,7 +4,7 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         jasmine : {
-            src : ['doubles/*', 'src/**/*.js'],
+            src : ['doubles/mock.js', 'src/**/*.js'],
             options : {
                 keepRunner: true,
                 specs : 'spec/**/*.js',
@@ -14,30 +14,19 @@ module.exports = function(grunt) {
                     requireConfig: {
                         map: {
                             '*': {
-                                'doubles/dummies': '../doubles/dummies'
+                                'mock': '../doubles/mock',
+                                'dependencies': '../doubles/dependencies'
                             }
-                        }
+                        },
+                        deps: ['dependencies']
                     }
                 }
-            }
-        },
-        jshint: {
-            all: [
-                'Gruntfile.js',
-                'src/**/*.js',
-                'spec/**/*.js'
-            ],
-            options: {
-                jshintrc: '.jshintrc'
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jasmine');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('test', ['jshint', 'jasmine']);
-
-    grunt.registerTask('default', ['test']);
+    grunt.registerTask('default', ['jasmine']);
 
 };
