@@ -1,4 +1,4 @@
-define(['calculator'], function(calculator) {
+define(['double/tokenizer'], function(tokenizer) {
 
     return {
 
@@ -6,15 +6,11 @@ define(['calculator'], function(calculator) {
             return string.split('');
         },
 
-        calc: function calc(string) {
-            var result = calculator.sum(2, 3);
-            return string + ' ' + result;
-        },
-
-        measure: function measure(string) {
-            speedometer.setSpeed(string.length);
-
-            return speedometer.getSpeed();
+        parseTokens: function parseTokens(string) {
+            if ('' === string) {
+                throw ('parseTokens: cannot parse an empty string');
+            }
+            return tokenizer.tokenize(string);
         }
     }
 });

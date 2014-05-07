@@ -1,4 +1,4 @@
-define(['mock!calculator', 'parser'], function(calculator, parser) {
+define(['double/tokenizer', 'parser'], function(tokenizer, parser) {
 
     describe('Parser', function() {
 
@@ -8,26 +8,19 @@ define(['mock!calculator', 'parser'], function(calculator, parser) {
 
         });
 
-        it('calculates a string', function() {
-
-            calculator.sum.andReturn(6);
-
-            expect(parser.calc('string')).toBe('string 6');
+        it('throws an error when given a empty string', function() {
+            expect(function() {
+                parser.parseTokens('');
+            }).toThrow('parseTokens: cannot parse an empty string');
         });
 
-        xit('calculates a string again', function() {
+        it('parses a string into tokens', function() {
 
-            calculator.sum.andReturn(15);
+            tokenizer.tokenize.andReturn(['a', 'b']);
 
-            expect(parser.calc('string')).toBe('string 15');
+            expect(parser.parseTokens('{b} string {a}')).toEqual(['a', 'b']);
+            expect(tokenizer.tokenize).toHaveBeenCalledWith('{b} string {a}');
         });
 
-        xit('it measures the speed of a string', function() {
-
-            speedometer.getSpeed.andReturn(6);
-
-            expect(parser.measure('string')).toBe(6);
-            expect(speedometer.setSpeed).toHaveBeenCalledWith(6);
-        })
     })
 })
