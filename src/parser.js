@@ -1,4 +1,4 @@
-define(['double/tokenizer'], function(tokenizer) {
+define(['tokenizer'], function(tokenizer) {
 
     return {
 

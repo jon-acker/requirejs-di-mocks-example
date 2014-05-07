@@ -1,3 +1,7 @@
-define(['src/calculator'], function(calculator) {
-    console.log(calculator.sum(4, 5));
+require.config({
+    baseUrl: 'src/'
+});
+
+define(['parser'], function(parser) {
+    console.log(parser.parseTokens('{a} string {d} blah {b} {c}'));
 });
