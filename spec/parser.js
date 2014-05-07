@@ -15,7 +15,7 @@ define(['mock!calculator', 'parser'], function(calculator, parser) {
             expect(parser.calc('string')).toBe('string 6');
         });
 
-        xit('calculates a string again', function() {
+        it('calculates a string again', function() {
 
             calculator.sum.andReturn(15);
 
