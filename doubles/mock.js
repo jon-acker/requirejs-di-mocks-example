@@ -1,13 +1,7 @@
 define(function () {
-    var dependencies = {
-        parser: [
-            'calculator',
-            'speedometer'
-        ],
-        calculator: [
-            'speedometer'
-        ]
-    };
+    'use strict';
+
+    var dependencies = require('dependencies');
 
     Object.keys(dependencies).forEach(function(moduleName) {
          dependencies[moduleName].forEach(function(requiredModule) {
@@ -19,13 +13,12 @@ define(function () {
         });
     });
 
-    var context = require.config({
+    require.config({
         map: dependencies
     });
 
     return {
-        load: function(requiredModule, req, load, config) {
-            console.log('loading: ' + requiredModule);
+        load: function(requiredModule, req, load) {
             req(['double/' + requiredModule], function (module) {
                 load(module);
             });
