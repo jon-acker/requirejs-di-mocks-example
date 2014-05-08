@@ -136,7 +136,7 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         jasmine : {
-            src : ['doubles/doubles.js', 'src/**/*.js'],
+            src : ['src/**/*.js'],
             options : {
                 keepRunner: true,
                 specs : 'spec/**/*.js',
@@ -148,7 +148,8 @@ module.exports = function(grunt) {
                             'parser': {
                                 'tokenizer': 'double/tokenizer'
                             }
-                        }
+                        },
+                        deps: ['../doubles/doubles']
                     }
                 }
             }
@@ -163,7 +164,7 @@ module.exports = function(grunt) {
 
 The "map" configuration options essentially tells requirejs that when "parser" requires "tokenizer", give it "double/tokenizer" instead.
 
-We also need to define our dummy collaborators in the file doubles/doubles.js (which we've asked grunt-jasmine to process prior to any other files)
+We also need to define our dummy collaborators in the file doubles/doubles.js (which we've asked grunt-jasmine to process prior to any other files, using the "deps" configuraiton option)
 
 In the folder doubles/ create a new file called doubles.js:
 ```javascript
