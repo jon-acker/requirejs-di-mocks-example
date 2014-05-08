@@ -1,3 +1,5 @@
-require.config({
-    baseUrl: 'src/'
-})
+
+    require.config({
+        baseUrl: 'src/'
+    });
+

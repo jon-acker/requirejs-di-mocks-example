@@ -4,7 +4,7 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         jasmine : {
-            src : ['doubles/mock.js', 'src/**/*.js'],
+            src : ['src/**/*.js'],
             options : {
                 keepRunner: true,
                 specs : 'spec/**/*.js',
@@ -14,11 +14,12 @@ module.exports = function(grunt) {
                     requireConfig: {
                         map: {
                             '*': {
+                                'collaborator/builder': '../doubles/collaborator/builder',
                                 'mock': '../doubles/mock',
-                                'dependencies': '../doubles/dependencies'
+                                'collaborators': '../doubles/collaborators'
                             }
                         },
-                        deps: ['dependencies']
+                        deps: ['collaborators', 'collaborator/builder', 'mock']
                     }
                 }
             }

@@ -1,25 +1,16 @@
 define(function () {
     'use strict';
 
-    var dependencies = require('dependencies');
-
-    Object.keys(dependencies).forEach(function(moduleName) {
-         dependencies[moduleName].forEach(function(requiredModule) {
-             define('double/' + requiredModule, [requiredModule], function(module) {
-                 return jasmine.createSpyObj(requiredModule, Object.keys(module));
-             });
-
-             dependencies[moduleName][requiredModule] = 'double/' + requiredModule;
-        });
-    });
+    var collaborators = require('collaborators');
+    var collaboratorBuilder = require('collaborator/builder');
 
     require.config({
-        map: dependencies
+        map: collaboratorBuilder.createDependencyMap(collaborators)
     });
 
     return {
         load: function(requiredModule, req, load) {
-            req(['double/' + requiredModule], function (module) {
+            req([collaboratorBuilder.DOUBLES_PREFIX + requiredModule], function (module) {
                 load(module);
             });
         }
