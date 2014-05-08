@@ -1,11 +1,8 @@
 define(function() {
     return {
-        parser: [
-            'calculator',
-            'speedometer'
-        ],
-        calculator: [
-            'speedometer'
+        'markdown': [
+            'renderer/header',
+            'renderer/list'
         ]
     };
 });
