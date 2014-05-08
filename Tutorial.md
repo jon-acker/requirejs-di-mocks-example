@@ -2,7 +2,7 @@
 
 ###Introduction
 
-Since AMD has become something of a standard for loading, managing and splitting javascript into modules, it would be useful to have a simple way of developing those modules in isolation from each other, using dummy collaborators to stand in for real collaborations in those modules that have depdencies on other modules, which we do not want to test.
+Since AMD has become something of a standard for loading, managing and splitting javascript into modules, it would be useful to have a simple way of developing those modules in isolation from each other, using dummy collaborators to stand in for real collaborations in those modules that have dependencies on other modules, which we do not want to test.
 
 There are several mocking frameworks and libraries that allow us to do this, each using slightly different mechanisms. For example there is [Isolate](https://github.com/tnwinc/Isolate) (which required learning it specific syntax) and [Squire](https://github.com/iammerrick/Squire.js/), which introduces it own global keyword and syntax.
 
@@ -35,7 +35,34 @@ Run the command:
 ```
 npm install
 ```
-This should install all the dependencies for the project. Now running
+This should install all the dependencies for the project. 
+You will need to create a configuration file for grunt, in the root directory, called Gruntfile.js:
+```javascript
+module.exports = function(grunt) {
+
+    grunt.initConfig({
+        jasmine : {
+            src : ['src/**/*.js'],
+            options : {
+                keepRunner: true,
+                specs : 'spec/**/*.js',
+                template: require('grunt-template-jasmine-requirejs'),
+                templateOptions: {
+                    requireConfig: {
+                        baseUrl: 'src/'
+                    }
+                }
+            }
+        }
+    });
+
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
+
+    grunt.registerTask('default', ['jasmine']);
+};
+```
+
+Now running
 ```
 grunt jasmine
 ```
