@@ -2,7 +2,7 @@
 
 ###Introduction
 
-Since AMD has become something of a standard for loading, managing and splitting javascript into modules, it would be useful to have a simple way of developing those modules in isolation from each other, using dummy collaborators to stand in for real collaborations in those modules that have dependencies on other modules, which we do not want to test.
+Since AMD ([Asycronous Module Definition](http://en.wikipedia.org/wiki/Asynchronous_module_definition)) has become a de-facto standard for loading, managing and splitting javascript into modules, it would be useful to have a simple way of developing those modules in isolation from each other, using dummy collaborators to stand in for real collaborations in those modules that have dependencies on other modules, which we do not want to test.
 
 There are several mocking frameworks and libraries that allow us to do this, each using slightly different mechanisms. For example there is [Isolate](https://github.com/tnwinc/Isolate) (which required learning it specific syntax) and [Squire](https://github.com/iammerrick/Squire.js/), which introduces it own global keyword and syntax.
 
@@ -142,7 +142,7 @@ module.exports = function(grunt) {
                 specs : 'spec/**/*.js',
                 template: require('grunt-template-jasmine-requirejs'),
                 templateOptions: {
-                    requireConfig: {,
+                    requireConfig: {
                         baseUrl: 'src/',
                         map: {
                             'parser': {
