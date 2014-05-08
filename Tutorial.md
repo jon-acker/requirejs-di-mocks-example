@@ -6,10 +6,10 @@ Since AMD has become something of a standard for loading, managing and splitting
 
 There are several mocking frameworks and libraries that allow us to do this, each using slightly different mechanisms. For example there is [Isolate](https://github.com/tnwinc/Isolate) (which required learning it specific syntax) and [Squire](https://github.com/iammerrick/Squire.js/), which introduces it own global keyword and syntax.
 
-Nevertheless we can do his farily simply without using yet another framework, taking advantage of the fact that RequireJs is in fact a DI container, and the dependencies it provides can be switched through configuration.
+Nevertheless we can do his fairly simply without using yet another framework, taking advantage of the fact that RequireJs is in fact a DI container, and the dependencies it provides can be switched through configuration.
 
 ###Specing a module that has no dependencies
-I'll be using [Grunt] to provide a vaguely presentable jasmine runnner and a [grunt template] which renders the required HTML (which grunt will produce in _SpecRunner.html), this allows us to run the specs both in the browser and on the command line.
+I'll be using [Grunt] to provide a vaguely presentable jasmine runner and a [grunt template] which renders the required HTML (which grunt will produce in _SpecRunner.html), this allows us to run the specs both in the browser and on the command line.
 
 You'll need the grunt command line tool:
 ```
@@ -38,6 +38,7 @@ npm install
 This should install all the dependencies for the project.
 
 You will need to create a configuration file for grunt, in the root directory, called Gruntfile.js:
+
 ```javascript
 module.exports = function(grunt) {
 
@@ -110,7 +111,7 @@ Testing jasmine specs via phantom
 ```
 
 ###Specing a module that has dependencies
-The point of this article was to show a simple way of specing a module in isolation, using AMD, even when this module has dependencies, so at this point I'll be introducing a collaborator to our parser module, whose behaviour we want to mock, so that we can continue to work on the parser module without the distraction of having to write any of the implentation of its collaboarting module.
+The point of this article was to show a simple way of spec'ing a module in isolation, using AMD, even when this module has dependencies, so at this point I'll be introducing a collaborator to our parser module, whose behaviour we want to mock, so that we can continue to work on the parser module without the distraction of having to write any of the implementation of its collaborating module.
 
 Imagine we want a new method on our parser, which can parse "token" (whatever that means), but we know that parsing tokens is probably a complex algorithm that we'd like to delegate to a collaborator called "tokenizer"
 
@@ -126,6 +127,7 @@ define(['double/tokenizer', 'parser'], function(tokenizer, parser) {
     });
 });
 ```
+
 If we run grunt jasmine, it will complain that it can't find the module "double/tokenizer". In order to provide our double to the spec, we'll take advantage of requirejs's custom mapping feature, and tell it to include our simple definition of this dummy collaborator:
 
 
@@ -251,8 +253,8 @@ Testing jasmine specs via phantom
 >> 0 failures
 ```
 
-##Using the module in the production envionment
-Requirejs can be instructed, on load, to run an intial module, often called main.js. Your index.html needs to read as follows:
+##Using the module in the production environment
+Requirejs can be instructed, on load, to run an initial module, often called main.js. Your index.html needs to read as follows:
 ```
 <script src="node_modules/grunt-template-jasmine-requirejs/vendor/require-2.1.10.js" data-main="main.js"></script>
 ```
@@ -270,7 +272,7 @@ define(['parser'], function(parser) {
 
 If you load the file index.html into your browser, you'll see an error effectively telling you that the tokenizer module doesn't exist - since so far it has only been mocked!
 
-In src/tokenizer.js create an implementation for the tokenizer module:
+In the folder src/, create a new file called tokenizer.js, which will contain an implementation for the tokenizer module:
 ```javascript
 define(function() {
    return {
