@@ -35,7 +35,8 @@ Run the command:
 ```
 npm install
 ```
-This should install all the dependencies for the project. 
+This should install all the dependencies for the project.
+
 You will need to create a configuration file for grunt, in the root directory, called Gruntfile.js:
 ```javascript
 module.exports = function(grunt) {
