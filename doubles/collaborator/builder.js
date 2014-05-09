@@ -5,8 +5,8 @@ define(['collaborator/definer'], function(definer) {
 
     /**
      *
-     * @param {object} collaborators
-     * @returns {object}
+     * @param {object} collaborators - Map of modules to their required collaborators
+     * @returns {object} dependencyMap - New mapping to be used by require config
      * @private
      */
     function _createDependencyMap(collaborators) {
@@ -29,7 +29,7 @@ define(['collaborator/definer'], function(definer) {
         createDependencyMap: function(collaborators) {
             return _createDependencyMap(collaborators);
         },
-        
+
         DOUBLES_PREFIX: DOUBLES_PREFIX
     }
 });
