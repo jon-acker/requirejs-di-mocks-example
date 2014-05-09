@@ -22,10 +22,13 @@ module.exports = function(grunt) {
                         },
                         deps: [
                             'collaborators',
-                            'collaborator/definer',
-                            'collaborator/builder',
-                            'mock'
-                        ]
+                            'collaborator/builder'
+                        ],
+                        callback: function(collaborators, collaboratorBuilder) {
+                            require.config({
+                                map: collaboratorBuilder.createDependencyMap(collaborators)
+                            });
+                        }
                     }
                 }
             }

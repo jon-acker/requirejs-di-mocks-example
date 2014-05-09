@@ -1,4 +1,4 @@
-define(['mock!calculator', 'parser'], function(calculator, parser) {
+define(['double/calculator', 'parser'], function(calculator, parser) {
 
     describe('Parser', function() {
 

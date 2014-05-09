@@ -3,12 +3,6 @@ define(['collaborator/definer'], function(definer) {
 
     var DOUBLES_PREFIX = 'double/';
 
-    /**
-     *
-     * @param {object} collaborators - Map of modules to their required collaborators
-     * @returns {object} dependencyMap - New mapping to be used by require config
-     * @private
-     */
     function _createDependencyMap(collaborators) {
         var dependencyMap = {};
 
@@ -29,7 +23,6 @@ define(['collaborator/definer'], function(definer) {
         createDependencyMap: function(collaborators) {
             return _createDependencyMap(collaborators);
         },
-
         DOUBLES_PREFIX: DOUBLES_PREFIX
     }
 });
