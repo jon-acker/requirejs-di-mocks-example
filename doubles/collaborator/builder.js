@@ -18,7 +18,6 @@ define(['collaborator/definer'], function(definer) {
         return dependencyMap;
     }
 
-
     return {
         createDependencyMap: function(collaborators) {
             return _createDependencyMap(collaborators);

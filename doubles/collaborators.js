@@ -1,7 +1,11 @@
 define(function() {
     return {
         parser: {
-            'calculator': ['sum']
+            'calculator': ['sum'],
+            'speedometer': null
+        },
+        calculator: {
+            'speedometer': null
         }
     };
 });
