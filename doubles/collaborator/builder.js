@@ -3,9 +3,9 @@ define(function() {
 
     var DOUBLES_PREFIX = 'double/';
 
-    function _define(requiredModule) {
-        define(DOUBLES_PREFIX + requiredModule, [requiredModule], function (module) {
-            return jasmine.createSpyObj(requiredModule, Object.keys(module));
+    function _define(requiredModule, methods) {
+        define(DOUBLES_PREFIX + requiredModule, function () {
+            return jasmine.createSpyObj(requiredModule, methods);
         });
     }
 
@@ -15,8 +15,9 @@ define(function() {
         Object.keys(collaborators).forEach(function(moduleName) {
             dependencyMap[moduleName] = dependencyMap[moduleName] || {};
 
-            collaborators[moduleName].forEach(function(requiredModule) {
-                _define(requiredModule);
+            Object.keys(collaborators[moduleName]).forEach(function(requiredModule) {
+                var methods = collaborators[moduleName][requiredModule];
+                _define(requiredModule, methods);
                 dependencyMap[moduleName][requiredModule] = DOUBLES_PREFIX + requiredModule;
             });
         });

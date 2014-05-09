@@ -19,7 +19,7 @@ module.exports = function(grunt) {
                                 'collaborators': '../doubles/collaborators'
                             }
                         },
-                        deps: ['collaborators', 'collaborator/builder', 'mock']
+                        deps: ['collaborator/builder', 'collaborators', 'mock']
                     }
                 }
             }

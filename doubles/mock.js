@@ -1,8 +1,8 @@
 define(function () {
     'use strict';
 
-    var collaborators = require('collaborators');
     var collaboratorBuilder = require('collaborator/builder');
+    var collaborators = require('collaborators');
 
     require.config({
         map: collaboratorBuilder.createDependencyMap(collaborators)

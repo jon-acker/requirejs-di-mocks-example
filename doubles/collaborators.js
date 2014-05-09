@@ -1,8 +1,8 @@
 define(function() {
     return {
-        'markdown': [
-            'renderer/header',
-            'renderer/list'
-        ]
+        'markdown': {
+            'renderer/header': ['render'],
+            'renderer/list': ['render']
+        }
     };
 });
