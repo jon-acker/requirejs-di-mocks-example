@@ -1,14 +1,14 @@
 {
-  "name": "Require-DI",
-  "version": "0.0.2",
-  "description": "Exmample of dependency injection using requirejs",
+  "name": "requirejs-jasmine-collaborator",
+  "version": "0.0.3",
+  "description": "Use requirejs as dependency injection container and provide test collaborators using jasmine",
   "main": "main.js",
   "scripts": {
     "test": "grunt jasmine"
   },
   "devDependencies": {
+    "grunt": "0.4.4",
     "grunt-contrib-jasmine": "~0.5.3",
-    "grunt-contrib-jshint": "~0.2.0",
     "grunt-template-jasmine-requirejs": "~0.1.10"
   },
   "author": "Jon Acker"
