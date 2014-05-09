@@ -15,11 +15,17 @@ module.exports = function(grunt) {
                         map: {
                             '*': {
                                 'collaborator/builder': '../doubles/collaborator/builder',
+                                'collaborator/definer': '../doubles/collaborator/definer',
                                 'mock': '../doubles/mock',
                                 'collaborators': '../doubles/collaborators'
                             }
                         },
-                        deps: ['collaborators', 'collaborator/builder', 'mock']
+                        deps: [
+                            'collaborators',
+                            'collaborator/definer',
+                            'collaborator/builder',
+                            'mock'
+                        ]
                     }
                 }
             }

@@ -1,11 +1,11 @@
 define(function() {
     return {
-        parser: [
-            'calculator',
-            'speedometer'
-        ],
-        calculator: [
-            'speedometer'
-        ]
+        parser: {
+            'calculator': ['sum'],
+            'speedometer': null
+        },
+        calculator: {
+            'speedometer': null
+        }
     };
 });

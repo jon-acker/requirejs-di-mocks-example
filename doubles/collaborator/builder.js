@@ -1,22 +1,22 @@
-define(function() {
+define(['collaborator/definer'], function(definer) {
     'use strict';
 
     var DOUBLES_PREFIX = 'double/';
 
-    function _define(requiredModule) {
-        define(DOUBLES_PREFIX + requiredModule, [requiredModule], function (module) {
-            return jasmine.createSpyObj(requiredModule, Object.keys(module));
-        });
-    }
-
+    /**
+     *
+     * @param {object} collaborators
+     * @returns {object}
+     * @private
+     */
     function _createDependencyMap(collaborators) {
         var dependencyMap = {};
 
         Object.keys(collaborators).forEach(function(moduleName) {
             dependencyMap[moduleName] = dependencyMap[moduleName] || {};
 
-            collaborators[moduleName].forEach(function(requiredModule) {
-                _define(requiredModule);
+            Object.keys(collaborators[moduleName]).forEach(function(requiredModule) {
+                definer.defineDouble(requiredModule, collaborators[moduleName][requiredModule], DOUBLES_PREFIX);
                 dependencyMap[moduleName][requiredModule] = DOUBLES_PREFIX + requiredModule;
             });
         });
@@ -29,6 +29,7 @@ define(function() {
         createDependencyMap: function(collaborators) {
             return _createDependencyMap(collaborators);
         },
+        
         DOUBLES_PREFIX: DOUBLES_PREFIX
     }
 });
