@@ -19,17 +19,17 @@ sudo npm install -g grunt-cli
 Create a fresh directory to work in and switch to it, and create the file package.json:
 ```
 {
-  "name": "test-require",
+  "name": "mockist-tdd",
   "version": "0.0.0",
   "main": "Gruntfile.js",
   "devDependencies": {
-    "grunt": "~0.4.4",
-    "grunt-template-jasmine-requirejs": "~0.1.10",
-    "grunt-contrib-jasmine": "~0.5.3"
+    "grunt": "^0.4.5",
+    "grunt-contrib-jasmine": "^0.6.5",
+    "grunt-template-jasmine-requirejs": "^0.2.0",
+    "jquery": "^2.1.1"
   }
 }
 ```
-(You need to lock down your grunt-template-jasmine-requirejs and grunt-contrib-jasmine to these specific versions until the conflict between grunt-template-jasmine-requirejs and newer versions of grunt-contrib-jasmine are resolved)
 
 Run the command:
 ```
