@@ -44,7 +44,7 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         jasmine : {
-            src : ['src/**/*.js'],
+            src : [],
             options : {
                 keepRunner: true,
                 specs : 'spec/**/*.js',
@@ -136,7 +136,7 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         jasmine : {
-            src : ['src/**/*.js'],
+            src : [],
             options : {
                 keepRunner: true,
                 specs : 'spec/**/*.js',
@@ -286,5 +286,6 @@ define(function() {
 
 ##Taking it further and simplifying the process
 
-
+Its possible to get rid of much of the boilder-plate code surrounding the definitions of the collaborators and the mappings can be automated. I've started writing a requirejs plugin called "collaborator" to do just this, bear in mind this is a work in progress:
+https://github.com/jon-acker/collaborator
 
