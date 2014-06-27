@@ -6,7 +6,7 @@ Since AMD ([Asycronous Module Definition](http://en.wikipedia.org/wiki/Asynchron
 
 There are several mocking frameworks and libraries that allow us to do this, each using slightly different mechanisms. For example there is [Isolate](https://github.com/tnwinc/Isolate) (which required learning it specific syntax) and [Squire](https://github.com/iammerrick/Squire.js/), which introduces it own global keyword and syntax.
 
-Nevertheless we can do his fairly simply without using yet another framework, taking advantage of the fact that RequireJs is in fact a DI container, and the dependencies it provides can be switched through configuration.
+Nevertheless we can do his fairly simply without using yet another framework, taking advantage of the fact that RequireJs is in fact a DI container, and the dependencies it provides can be switched through configuration. Using only grunt, requirejs and jasmine means you will probably not have to learn any new syntax or understand a new framework.
 
 ###Specing a module that has no dependencies
 I'll be using [Grunt] to provide a vaguely presentable jasmine runner and a [grunt template] which renders the required HTML (which grunt will produce in _SpecRunner.html), this allows us to run the specs both in the browser and on the command line.
